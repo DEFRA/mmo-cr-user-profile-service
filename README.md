@@ -114,11 +114,17 @@ git config --global core.autocrlf false
 
 ## API endpoints
 
-| Endpoint             | Description                    |
-| :------------------- | :----------------------------- |
-| `GET: /health`       | Health                         |
-| `GET: /example    `  | Example API (remove as needed) |
-| `GET: /example/<id>` | Example API (remove as needed) |
+| Endpoint                                       | Description                                                                                    |
+| :--------------------------------------------- | :--------------------------------------------------------------------------------------------- |
+| `GET: /health`                                 | Health                                                                                         |
+| `GET: /example    `                            | Example API (remove as needed)                                                                 |
+| `GET: /example/<id>`                           | Example API (remove as needed)                                                                 |
+| `POST: /identity/token-claims`                 | Mock User Profile Service — Entra token-claims enrichment (unauthenticated, development mock)  |
+| `GET: /users/<entraObjectId>/roles`            | Mock User Profile Service — assigned user roles (unauthenticated, development mock)            |
+| `GET: /roles-definitions/services/<serviceId>` | Mock User Profile Service — role-to-capability definitions (unauthenticated, development mock) |
+
+See [docs/mock-user-profile-service.md](./docs/mock-user-profile-service.md) for the full mock contract,
+request/response examples and security limitations.
 
 ## Development helpers
 
