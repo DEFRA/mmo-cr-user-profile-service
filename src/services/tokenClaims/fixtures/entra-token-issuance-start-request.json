@@ -1,0 +1,19 @@
+{
+  "type": "microsoft.graph.authenticationEvent.tokenIssuanceStart",
+  "source": "/tenants/00000000-0000-0000-0000-000000000001/applications/33333333-3333-3333-3333-333333333333",
+  "data": {
+    "@odata.type": "microsoft.graph.onTokenIssuanceStartCalloutData",
+    "tenantId": "00000000-0000-0000-0000-000000000001",
+    "authenticationContext": {
+      "correlationId": "20ee06ca-57f5-46ec-9b69-4d3f4cf22783",
+      "client": {
+        "servicePrincipalId": "22222222-2222-2222-2222-222222222222",
+        "appId": "33333333-3333-3333-3333-333333333333",
+        "displayName": "Catch Recording Mobile"
+      }
+    },
+    "user": {
+      "id": "11111111-2222-3333-4444-555555555555"
+    }
+  }
+}

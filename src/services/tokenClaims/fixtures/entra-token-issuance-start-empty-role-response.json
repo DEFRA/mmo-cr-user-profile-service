@@ -1,0 +1,13 @@
+{
+  "data": {
+    "@odata.type": "microsoft.graph.onTokenIssuanceStartResponseData",
+    "actions": [
+      {
+        "@odata.type": "microsoft.graph.provideClaimsForToken",
+        "claims": {
+          "applicationRoles": []
+        }
+      }
+    ]
+  }
+}

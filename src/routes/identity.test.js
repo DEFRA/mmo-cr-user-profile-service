@@ -1,3 +1,22 @@
+import { readFileSync } from 'node:fs'
+
+const fixturesDir = new URL(
+  '../services/tokenClaims/fixtures/',
+  import.meta.url
+)
+const readFixture = (name) =>
+  JSON.parse(readFileSync(new URL(name, fixturesDir), 'utf-8'))
+
+const entraRequestFixture = readFixture(
+  'entra-token-issuance-start-request.json'
+)
+const knownUserResponseFixture = readFixture(
+  'entra-token-issuance-start-known-user-response.json'
+)
+const emptyRoleResponseFixture = readFixture(
+  'entra-token-issuance-start-empty-role-response.json'
+)
+
 describe('#identity token-claims route', () => {
   let server
 
@@ -18,33 +37,15 @@ describe('#identity token-claims route', () => {
     await server.stop({ timeout: 1000 })
   })
 
-  test('Should return assigned applicationRoles for a known user', async () => {
+  test('Should return the approved Entra response envelope for the representative request fixture', async () => {
     const { statusCode, result } = await server.inject({
       method: 'POST',
       url: '/identity/token-claims',
-      payload: {
-        type: 'microsoft.graph.authenticationEvent.tokenIssuanceStart',
-        data: {
-          '@odata.type': 'microsoft.graph.onTokenIssuanceStartCalloutData',
-          user: { id: '11111111-2222-3333-4444-555555555555' }
-        }
-      }
+      payload: entraRequestFixture
     })
 
     expect(statusCode).toBe(200)
-    expect(result).toEqual({
-      data: {
-        '@odata.type': 'microsoft.graph.onTokenIssuanceStartResponseData',
-        actions: [
-          {
-            '@odata.type': 'microsoft.graph.provideClaimsForToken',
-            claims: {
-              applicationRoles: ['PLDN--Skipper', 'VRO5--Owner']
-            }
-          }
-        ]
-      }
-    })
+    expect(result).toEqual(knownUserResponseFixture)
   })
 
   test('Should return an empty applicationRoles collection for an unknown user', async () => {
@@ -55,7 +56,7 @@ describe('#identity token-claims route', () => {
     })
 
     expect(statusCode).toBe(200)
-    expect(result.data.actions[0].claims.applicationRoles).toEqual([])
+    expect(result).toEqual(emptyRoleResponseFixture)
   })
 
   test('Should return an empty applicationRoles collection when data.user.id is missing', async () => {
@@ -66,16 +67,25 @@ describe('#identity token-claims route', () => {
     })
 
     expect(statusCode).toBe(200)
-    expect(result.data.actions[0].claims.applicationRoles).toEqual([])
+    expect(result).toEqual(emptyRoleResponseFixture)
+  })
+
+  test('Should return an empty applicationRoles collection for an empty body', async () => {
+    const { statusCode, result } = await server.inject({
+      method: 'POST',
+      url: '/identity/token-claims',
+      payload: {}
+    })
+
+    expect(statusCode).toBe(200)
+    expect(result).toEqual(emptyRoleResponseFixture)
   })
 
   test('Should work without an Authorization header', async () => {
     const { statusCode } = await server.inject({
       method: 'POST',
       url: '/identity/token-claims',
-      payload: {
-        data: { user: { id: '11111111-2222-3333-4444-555555555555' } }
-      }
+      payload: entraRequestFixture
     })
 
     expect(statusCode).toBe(200)
@@ -85,38 +95,39 @@ describe('#identity token-claims route', () => {
     const { result } = await server.inject({
       method: 'POST',
       url: '/identity/token-claims',
-      headers: { authorization: 'Bearer this-is-not-a-real-token' },
-      payload: {
-        data: { user: { id: '11111111-2222-3333-4444-555555555555' } }
-      }
+      headers: { authorization: '******' },
+      payload: entraRequestFixture
     })
 
-    expect(result.data.actions[0].claims.applicationRoles).toEqual([
-      'PLDN--Skipper',
-      'VRO5--Owner'
-    ])
+    expect(result).toEqual(knownUserResponseFixture)
   })
 
   test('Should ignore unrelated request properties', async () => {
     const { statusCode, result } = await server.inject({
       method: 'POST',
       url: '/identity/token-claims',
-      payload: {
-        type: 'microsoft.graph.authenticationEvent.tokenIssuanceStart',
-        source: '/tenants/00000000-0000-0000-0000-000000000001',
-        data: {
-          '@odata.type': 'microsoft.graph.onTokenIssuanceStartCalloutData',
-          tenantId: '00000000-0000-0000-0000-000000000001',
-          authenticationContext: { correlationId: 'some-correlation-id' },
-          user: { id: '11111111-2222-3333-4444-555555555555' }
-        }
-      }
+      payload: { ...entraRequestFixture, unexpectedTopLevelProperty: true }
     })
 
     expect(statusCode).toBe(200)
-    expect(result.data.actions[0].claims.applicationRoles).toEqual([
-      'PLDN--Skipper',
-      'VRO5--Owner'
-    ])
+    expect(result).toEqual(knownUserResponseFixture)
+  })
+
+  test('Should not let one response mutate the result of a later call', async () => {
+    const first = await server.inject({
+      method: 'POST',
+      url: '/identity/token-claims',
+      payload: entraRequestFixture
+    })
+
+    first.result.data.actions[0].claims.applicationRoles.push('injected-role')
+
+    const second = await server.inject({
+      method: 'POST',
+      url: '/identity/token-claims',
+      payload: entraRequestFixture
+    })
+
+    expect(second.result).toEqual(knownUserResponseFixture)
   })
 })
