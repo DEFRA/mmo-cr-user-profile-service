@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "definitionsVersion": "1",
+  "updatedAt": "2026-11-05T00:00:00Z",
+  "roles": [
+    {
+      "roleId": "Owner",
+      "displayName": "Owner",
+      "description": "User permitted to create, update and submit catch records",
+      "enabled": true,
+      "capabilities": [
+        {
+          "capabilityId": "catch-record.create",
+          "serviceId": "catch-recording"
+        },
+        { "capabilityId": "catch-record.read", "serviceId": "catch-recording" },
+        {
+          "capabilityId": "catch-record.submit",
+          "serviceId": "catch-recording"
+        },
+        {
+          "capabilityId": "catch-record.update",
+          "serviceId": "catch-recording"
+        }
+      ]
+    },
+    {
+      "roleId": "Skipper",
+      "displayName": "Skipper",
+      "description": "User permitted to view and amend catch records",
+      "enabled": true,
+      "capabilities": [
+        {
+          "capabilityId": "catch-record.amend",
+          "serviceId": "catch-recording"
+        },
+        { "capabilityId": "catch-record.read", "serviceId": "catch-recording" }
+      ]
+    },
+    {
+      "roleId": "ReadOnlyUser",
+      "displayName": "Read-only User",
+      "description": "User permitted to view catch records",
+      "enabled": true,
+      "capabilities": [
+        { "capabilityId": "catch-record.read", "serviceId": "catch-recording" }
+      ]
+    }
+  ]
+}
