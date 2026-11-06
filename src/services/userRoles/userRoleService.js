@@ -29,7 +29,7 @@ export function findRolesForUser(document, entraObjectId) {
     return []
   }
 
-  return [...user.roles].sort()
+  return [...user.roles].sort((a, b) => a.localeCompare(b))
 }
 
 /**
