@@ -13,7 +13,7 @@ describe('#tokenClaimsService', () => {
           {
             '@odata.type': 'microsoft.graph.provideClaimsForToken',
             claims: {
-              applicationRoles: ['PLDN--Skipper', 'VRO5--Owner']
+              applicationRoles: ['PH1234--Skipper', 'BM45--Owner']
             }
           }
         ]

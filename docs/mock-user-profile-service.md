@@ -13,7 +13,7 @@ invalid data produces a safe internal error rather than being silently accepted.
 ### `src/data/user-role-assignments.json`
 
 Maps a mock Entra object identifier to the vessel-scoped roles assigned to that user, for example
-`VRO5--Owner`. An identifier that is not present in the file is treated as an unknown user and always
+`BM45--Owner`. An identifier that is not present in the file is treated as an unknown user and always
 receives an empty role list — there is no default role.
 
 ### `src/data/roles-definitions.json`
@@ -114,7 +114,7 @@ Known-user response:
     "actions": [
       {
         "@odata.type": "microsoft.graph.provideClaimsForToken",
-        "claims": { "applicationRoles": ["PLDN--Skipper", "VRO5--Owner"] }
+        "claims": { "applicationRoles": ["PH1234--Skipper", "BM45--Owner"] }
       }
     ]
   }
@@ -143,7 +143,7 @@ GET /users/11111111-2222-3333-4444-555555555555/roles HTTP/1.1
   "schemaVersion": "1.0",
   "definitionsVersion": "1",
   "userId": "11111111-2222-3333-4444-555555555555",
-  "roles": ["PLDN--Skipper", "VRO5--Owner"]
+  "roles": ["PH1234--Skipper", "BM45--Owner"]
 }
 ```
 

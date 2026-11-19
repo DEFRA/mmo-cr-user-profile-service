@@ -7,7 +7,7 @@ const validDocument = {
   schemaVersion: '1.0',
   definitionsVersion: '1',
   updatedAt: '2026-11-05T00:00:00Z',
-  users: [{ entraObjectId: 'user-1', roles: ['VRO5--Owner', 'PLDN--Skipper'] }]
+  users: [{ entraObjectId: 'user-1', roles: ['BM45--Owner', 'PH1234--Skipper'] }]
 }
 
 describe('#userRoleDataSource', () => {
@@ -55,8 +55,8 @@ describe('#userRoleDataSource', () => {
         validateUserRoleAssignmentDocument({
           ...validDocument,
           users: [
-            { entraObjectId: 'user-1', roles: ['VRO5--Owner'] },
-            { entraObjectId: 'user-1', roles: ['PLDN--Skipper'] }
+            { entraObjectId: 'user-1', roles: ['BM45--Owner'] },
+            { entraObjectId: 'user-1', roles: ['PH1234--Skipper'] }
           ]
         })
       ).toThrow()
@@ -69,7 +69,7 @@ describe('#userRoleDataSource', () => {
           users: [
             {
               entraObjectId: 'user-1',
-              roles: ['VRO5--Owner', 'VRO5--Owner']
+              roles: ['BM45--Owner', 'BM45--Owner']
             }
           ]
         })

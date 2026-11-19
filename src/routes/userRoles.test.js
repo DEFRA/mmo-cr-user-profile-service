@@ -29,7 +29,7 @@ describe('#userRoles route', () => {
       schemaVersion: '1.0',
       definitionsVersion: '1',
       userId: '11111111-2222-3333-4444-555555555555',
-      roles: ['PLDN--Skipper', 'VRO5--Owner']
+      roles: ['PH1234--Skipper', 'BM45--Owner']
     })
   })
 
