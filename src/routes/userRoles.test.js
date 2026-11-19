@@ -21,15 +21,15 @@ describe('#userRoles route', () => {
   test('Should return assigned roles for a known user', async () => {
     const { statusCode, result } = await server.inject({
       method: 'GET',
-      url: '/users/11111111-2222-3333-4444-555555555555/roles'
+      url: '/users/77964ce1-f9f4-4616-9ef3-30436204747d/roles'
     })
 
     expect(statusCode).toBe(200)
     expect(result).toEqual({
       schemaVersion: '1.0',
       definitionsVersion: '1',
-      userId: '11111111-2222-3333-4444-555555555555',
-      roles: ['PH1234--Skipper', 'BM45--Owner']
+      userId: '77964ce1-f9f4-4616-9ef3-30436204747d',
+      roles: ['BM45--Owner', 'PH1234--Skipper']
     })
   })
 
@@ -51,7 +51,7 @@ describe('#userRoles route', () => {
   test('Should not require authentication', async () => {
     const { statusCode } = await server.inject({
       method: 'GET',
-      url: '/users/11111111-2222-3333-4444-555555555555/roles'
+      url: '/users/77964ce1-f9f4-4616-9ef3-30436204747d/roles'
     })
 
     expect(statusCode).toBe(200)

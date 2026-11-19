@@ -15,8 +15,8 @@ describe('#userRoleService', () => {
   describe('findRolesForUser', () => {
     test('Should return the assigned roles for a known user', () => {
       expect(findRolesForUser(document, 'user-1')).toEqual([
-        'PH1234--Skipper',
-        'BM45--Owner'
+        'BM45--Owner',
+        'PH1234--Skipper'
       ])
     })
 
@@ -39,8 +39,8 @@ describe('#userRoleService', () => {
       firstCall.push('injected-role')
 
       expect(findRolesForUser(document, 'user-1')).toEqual([
-        'PH1234--Skipper',
-        'BM45--Owner'
+        'BM45--Owner',
+        'PH1234--Skipper'
       ])
     })
   })

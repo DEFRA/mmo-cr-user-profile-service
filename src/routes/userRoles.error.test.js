@@ -25,7 +25,7 @@ describe('#userRoles route (data failure)', () => {
   test('Should return a safe 500 response when mock data cannot be loaded or validated', async () => {
     const { statusCode, result } = await server.inject({
       method: 'GET',
-      url: '/users/11111111-2222-3333-4444-555555555555/roles'
+      url: '/users/77964ce1-f9f4-4616-9ef3-30436204747d/roles'
     })
 
     expect(statusCode).toBe(500)

@@ -27,7 +27,7 @@ describe('#identity token-claims route (data failure)', () => {
       method: 'POST',
       url: '/identity/token-claims',
       payload: {
-        data: { user: { id: '11111111-2222-3333-4444-555555555555' } }
+        data: { user: { id: '77964ce1-f9f4-4616-9ef3-30436204747d' } }
       }
     })
 

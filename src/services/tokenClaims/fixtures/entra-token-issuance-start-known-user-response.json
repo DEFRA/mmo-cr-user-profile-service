@@ -5,7 +5,7 @@
       {
         "@odata.type": "microsoft.graph.provideClaimsForToken",
         "claims": {
-          "applicationRoles": ["PH1234--Skipper", "BM45--Owner"]
+          "applicationRoles": ["BM45--Owner", "PH1234--Skipper"]
         }
       }
     ]
