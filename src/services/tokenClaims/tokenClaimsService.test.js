@@ -3,7 +3,7 @@ import { buildTokenClaimsResponse } from './tokenClaimsService.js'
 describe('#tokenClaimsService', () => {
   test('Should return assigned applicationRoles for a known user', () => {
     const response = buildTokenClaimsResponse(
-      '11111111-2222-3333-4444-555555555555'
+      '77964ce1-f9f4-4616-9ef3-30436204747d'
     )
 
     expect(response).toEqual({
@@ -13,7 +13,7 @@ describe('#tokenClaimsService', () => {
           {
             '@odata.type': 'microsoft.graph.provideClaimsForToken',
             claims: {
-              applicationRoles: ['PLDN--Skipper', 'VRO5--Owner']
+              applicationRoles: ['BM45--Owner', 'PH1234--Skipper']
             }
           }
         ]
@@ -35,7 +35,7 @@ describe('#tokenClaimsService', () => {
 
   test('Should not return role capabilities in the claims response', () => {
     const response = buildTokenClaimsResponse(
-      '11111111-2222-3333-4444-555555555555'
+      '77964ce1-f9f4-4616-9ef3-30436204747d'
     )
 
     expect(response.data.actions[0].claims).not.toHaveProperty('capabilities')

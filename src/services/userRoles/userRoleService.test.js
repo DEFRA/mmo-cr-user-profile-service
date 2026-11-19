@@ -6,8 +6,8 @@ const document = validateUserRoleAssignmentDocument({
   definitionsVersion: '1',
   updatedAt: '2026-11-05T00:00:00Z',
   users: [
-    { entraObjectId: 'user-1', roles: ['VRO5--Owner', 'PLDN--Skipper'] },
-    { entraObjectId: 'user-2', roles: ['PLDN--Owner'] }
+    { entraObjectId: 'user-1', roles: ['BM45--Owner', 'PH1234--Skipper'] },
+    { entraObjectId: 'user-2', roles: ['PH1234--Owner'] }
   ]
 })
 
@@ -15,8 +15,8 @@ describe('#userRoleService', () => {
   describe('findRolesForUser', () => {
     test('Should return the assigned roles for a known user', () => {
       expect(findRolesForUser(document, 'user-1')).toEqual([
-        'PLDN--Skipper',
-        'VRO5--Owner'
+        'BM45--Owner',
+        'PH1234--Skipper'
       ])
     })
 
@@ -39,8 +39,8 @@ describe('#userRoleService', () => {
       firstCall.push('injected-role')
 
       expect(findRolesForUser(document, 'user-1')).toEqual([
-        'PLDN--Skipper',
-        'VRO5--Owner'
+        'BM45--Owner',
+        'PH1234--Skipper'
       ])
     })
   })

@@ -4,12 +4,12 @@
   "updatedAt": "2026-11-05T00:00:00Z",
   "users": [
     {
-      "entraObjectId": "11111111-2222-3333-4444-555555555555",
-      "roles": ["VRO5--Owner", "PLDN--Skipper"]
+      "entraObjectId": "77964ce1-f9f4-4616-9ef3-30436204747d",
+      "roles": ["BM45--Owner", "PH1234--Skipper"]
     },
     {
       "entraObjectId": "66666666-7777-8888-9999-000000000000",
-      "roles": ["PLDN--Owner", "VRO5--Skipper"]
+      "roles": ["PH1234--Owner", "BM45--Skipper"]
     }
   ]
 }

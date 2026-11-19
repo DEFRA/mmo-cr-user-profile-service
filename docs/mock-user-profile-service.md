@@ -13,7 +13,7 @@ invalid data produces a safe internal error rather than being silently accepted.
 ### `src/data/user-role-assignments.json`
 
 Maps a mock Entra object identifier to the vessel-scoped roles assigned to that user, for example
-`VRO5--Owner`. An identifier that is not present in the file is treated as an unknown user and always
+`BM45--Owner`. An identifier that is not present in the file is treated as an unknown user and always
 receives an empty role list — there is no default role.
 
 ### `src/data/roles-definitions.json`
@@ -100,7 +100,7 @@ Known-user request:
         "displayName": "Catch Recording Mobile"
       }
     },
-    "user": { "id": "11111111-2222-3333-4444-555555555555" }
+    "user": { "id": "77964ce1-f9f4-4616-9ef3-30436204747d" }
   }
 }
 ```
@@ -114,7 +114,7 @@ Known-user response:
     "actions": [
       {
         "@odata.type": "microsoft.graph.provideClaimsForToken",
-        "claims": { "applicationRoles": ["PLDN--Skipper", "VRO5--Owner"] }
+        "claims": { "applicationRoles": ["PH1234--Skipper", "BM45--Owner"] }
       }
     ]
   }
@@ -135,15 +135,15 @@ Direct inspection of a mock user's assigned roles. `entraObjectId` is an opaque 
 validated as a real Entra object identifier.
 
 ```
-GET /users/11111111-2222-3333-4444-555555555555/roles HTTP/1.1
+GET /users/77964ce1-f9f4-4616-9ef3-30436204747d/roles HTTP/1.1
 ```
 
 ```json
 {
   "schemaVersion": "1.0",
   "definitionsVersion": "1",
-  "userId": "11111111-2222-3333-4444-555555555555",
-  "roles": ["PLDN--Skipper", "VRO5--Owner"]
+  "userId": "77964ce1-f9f4-4616-9ef3-30436204747d",
+  "roles": ["PH1234--Skipper", "BM45--Owner"]
 }
 ```
 
