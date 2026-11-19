@@ -7,7 +7,9 @@ const validDocument = {
   schemaVersion: '1.0',
   definitionsVersion: '1',
   updatedAt: '2026-11-05T00:00:00Z',
-  users: [{ entraObjectId: 'user-1', roles: ['BM45--Owner', 'PH1234--Skipper'] }]
+  users: [
+    { entraObjectId: 'user-1', roles: ['BM45--Owner', 'PH1234--Skipper'] }
+  ]
 }
 
 describe('#userRoleDataSource', () => {
