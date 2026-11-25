@@ -1,5 +1,23 @@
 import { buildTokenClaimsResponse } from './tokenClaimsService.js'
 
+vi.mock(
+  '#/services/userRoles/userRoleDataSource.js',
+  async (importOriginal) => ({
+    ...(await importOriginal()),
+    loadUserRoleAssignments: () => ({
+      schemaVersion: '1.0',
+      definitionsVersion: '1',
+      updatedAt: '2026-11-05T00:00:00Z',
+      users: [
+        {
+          entraObjectId: '77964ce1-f9f4-4616-9ef3-30436204747d',
+          roles: ['BM45--Owner', 'PH1234--Skipper']
+        }
+      ]
+    })
+  })
+)
+
 describe('#tokenClaimsService', () => {
   test('Should return assigned applicationRoles for a known user', () => {
     const response = buildTokenClaimsResponse(

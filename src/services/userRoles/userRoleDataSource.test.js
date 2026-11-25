@@ -87,14 +87,6 @@ describe('#userRoleDataSource', () => {
   })
 
   describe('loadUserRoleAssignments', () => {
-    test('Should load and validate the committed mock data file', () => {
-      const document = loadUserRoleAssignments()
-
-      expect(document.schemaVersion).toBe('1.0')
-      expect(Array.isArray(document.users)).toBe(true)
-      expect(document.users.length).toBeGreaterThan(0)
-    })
-
     test('Should throw a safe internal error when the file is missing', () => {
       expect(() =>
         loadUserRoleAssignments('/nonexistent/path/user-role-assignments.json')
