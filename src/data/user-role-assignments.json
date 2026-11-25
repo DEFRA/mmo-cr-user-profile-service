@@ -14,6 +14,10 @@
     {
       "entraObjectId": "ce7a00d3-f806-45bb-aa28-0de3a7e57b76",
       "roles": ["PH1234--Owner", "BM45--Skipper"]
+    },
+    {
+      "entraObjectId": "68ae51ec-ec49-406f-a838-6c86f16f35c4",
+      "roles": ["PH1234--Owner", "BM45--Skipper"]
     }
   ]
 }
