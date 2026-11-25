@@ -1,5 +1,23 @@
 import { readFileSync } from 'node:fs'
 
+vi.mock(
+  '#/services/userRoles/userRoleDataSource.js',
+  async (importOriginal) => ({
+    ...(await importOriginal()),
+    loadUserRoleAssignments: () => ({
+      schemaVersion: '1.0',
+      definitionsVersion: '1',
+      updatedAt: '2026-11-05T00:00:00Z',
+      users: [
+        {
+          entraObjectId: '77964ce1-f9f4-4616-9ef3-30436204747d',
+          roles: ['BM45--Owner', 'PH1234--Skipper']
+        }
+      ]
+    })
+  })
+)
+
 const fixturesDir = new URL(
   '../services/tokenClaims/fixtures/',
   import.meta.url
